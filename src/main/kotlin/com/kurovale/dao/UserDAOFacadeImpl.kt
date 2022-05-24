@@ -8,8 +8,7 @@ import org.jetbrains.exposed.sql.*
 class UserDAOFacadeImpl : UserDAOFacade {
     private fun resultRowToUser(row: ResultRow) = User(
         id = row[Users.id],
-        username = row[Users.username],
-        password = row[Users.password]
+        username = row[Users.username]
     )
 
     override suspend fun showAllUsers(): List<User> = dbQuery {
