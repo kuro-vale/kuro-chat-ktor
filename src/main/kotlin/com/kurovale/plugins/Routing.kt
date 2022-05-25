@@ -1,5 +1,6 @@
 package com.kurovale.plugins
 
+import com.kurovale.routes.authRouting
 import io.ktor.server.routing.*
 import io.ktor.server.application.*
 import io.ktor.server.freemarker.*
@@ -15,5 +16,6 @@ fun Application.configureRouting() {
         get("/") {
             call.respond(FreeMarkerContent("index.ftl", model = null))
         }
+        authRouting()
     }
 }
