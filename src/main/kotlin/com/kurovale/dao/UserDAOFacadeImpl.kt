@@ -11,17 +11,6 @@ class UserDAOFacadeImpl : UserDAOFacade {
         username = row[Users.username]
     )
 
-    override suspend fun showAllUsers(): List<User> = dbQuery {
-        Users.selectAll().map(::resultRowToUser)
-    }
-
-    override suspend fun showUser(id: Int): User? = dbQuery {
-        Users
-            .select { Users.id eq id }
-            .map(::resultRowToUser)
-            .singleOrNull()
-    }
-
     override suspend fun storeUser(username: String, password: String): User? = dbQuery {
         val insertStatement = Users.insert {
             it[Users.username] = username
