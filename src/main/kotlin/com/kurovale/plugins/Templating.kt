@@ -9,5 +9,6 @@ fun Application.configureTemplating() {
     install(FreeMarker) {
         templateLoader = ClassTemplateLoader(this::class.java.classLoader, "templates")
         outputFormat = HTMLOutputFormat.INSTANCE
+        defaultEncoding = "UTF-8"
     }
 }

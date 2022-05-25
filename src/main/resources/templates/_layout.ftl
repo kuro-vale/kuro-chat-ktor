@@ -2,7 +2,8 @@
     <!DOCTYPE html>
     <html lang="en">
     <head>
-    <meta charset="utf-8">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Kuro Chat</title>
         <link rel="icon" href="/static/favicon.ico">
@@ -25,18 +26,20 @@
                     </button>
                     <div class="collapse show" id="general-collapse">
                       <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded"># general-01</a></li>
-                        <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded"># general-02</a></li>
+                        <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded"># general-english</a></li>
+                        <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded"># general-español</a></li>
                       </ul>
                     </div>
                   </li>
                   <li class="mb-1">
-                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#whispers-collapse" aria-expanded="false">
-                      Whispers
+                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#topics-collapse" aria-expanded="false">
+                      Topics
                     </button>
-                    <div class="collapse" id="whispers-collapse">
+                    <div class="collapse" id="topics-collapse">
                       <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded"># Kurovale</a></li>
+                        <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded"># video-games</a></li>
+                        <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded"># movies</a></li>
+                        <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded"># books</a></li>
                       </ul>
                     </div>
                   </li>
@@ -60,8 +63,10 @@
         <div class="d-flex flex-column container">
             <nav class="navbar navbar-expand-lg bg-light">
                 <div class="container-fluid d-flex justify-content-between">
-                    <a class="navbar-brand" role="button" data-bs-toggle="collapse" data-bs-target="#collapseSide" aria-expanded="true" aria-controls="collapseSide">|||</a>
-                    <h2># general-01</h2>
+                    <a class="navbar-brand" role="button" data-bs-toggle="collapse" data-bs-target="#collapseSide" aria-expanded="true" aria-controls="collapseSide">
+                        <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M14 19h-14v-1h14v1zm9.247-8.609l-3.247 4.049-3.263-4.062-.737.622 4 5 4-5-.753-.609zm-9.247 2.609h-14v-1h14v1zm0-6h-14v-1h14v1z"/></svg>
+                    </a>
+                    <h3>Give me a ⭐ in my <a class="link-dark" href="https://github.com/kuro-vale/kuro-chat-ktor" target="_blank">GitHub</a></h2>
                     <p></p>
                 </div>
             </nav>
