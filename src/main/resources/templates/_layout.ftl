@@ -51,7 +51,7 @@
                     <div class="collapse show" id="account-collapse">
                       <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                         <#if authenticated>
-                            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Profile</a></li>
+                            <li><a href="/profile" class="link-dark d-inline-flex text-decoration-none rounded">Profile</a></li>
                             <li>
                                 <form action="/auth/logout" method="post">
                                 <a onclick='this.parentNode.submit(); return false;' class="link-dark d-inline-flex text-decoration-none rounded">Sign out</a>

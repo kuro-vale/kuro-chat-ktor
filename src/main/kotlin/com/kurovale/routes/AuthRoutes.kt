@@ -54,22 +54,27 @@ fun Route.authRouting() {
     }
     authenticate("auth-session") {
         get("profile") {
-            // todo
-        }
-        get("/hello") {
             val userSession = call.principal<UserSession>()
             call.sessions.set(userSession?.copy())
-            call.respondText("Hello ${userSession?.name}")
+            call.respond(FreeMarkerContent("profile.ftl", mapOf("user" to userSession?.name, "authenticated" to true)))
         }
         post("profile") {
+            val userSession = call.principal<UserSession>()
+            call.sessions.set(userSession?.copy())
+            val user = userSession?.name?.let { it1 -> userDAO.getUser(it1) }
             val formParameters = call.receiveParameters()
             when (formParameters.getOrFail("_action")) {
                 "update" -> {
-//                    val username = formParameters.getOrFail("username")
-                    // todo
+                    val newUsername = formParameters.getOrFail("username")
+                    user?.id?.let { it1 -> userDAO.editUser(it1, newUsername) }
+                    val updatedUser = userDAO.getUser(newUsername)
+                    call.sessions.set(updatedUser?.username?.let { it1 -> UserSession(it1) })
+                    call.respondRedirect("/")
                 }
                 "delete" -> {
-                    // todo
+                    user?.id?.let { it1 -> userDAO.deleteUser(it1) }
+                    call.sessions.clear<UserSession>()
+                    call.respondRedirect("/")
                 }
             }
         }
