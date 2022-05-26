@@ -26,8 +26,8 @@
                     </button>
                     <div class="collapse" id="general-collapse">
                       <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded"># general-english</a></li>
-                        <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded"># general-español</a></li>
+                        <li><a href="/general-english" class="link-dark d-inline-flex text-decoration-none rounded"># general-english</a></li>
+                        <li><a href="/general-spanish" class="link-dark d-inline-flex text-decoration-none rounded"># general-español</a></li>
                       </ul>
                     </div>
                   </li>
@@ -37,9 +37,9 @@
                     </button>
                     <div class="collapse" id="topics-collapse">
                       <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded"># video-games</a></li>
-                        <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded"># movies</a></li>
-                        <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded"># books</a></li>
+                        <li><a href="/games" class="link-dark d-inline-flex text-decoration-none rounded"># games</a></li>
+                        <li><a href="/movies" class="link-dark d-inline-flex text-decoration-none rounded"># movies</a></li>
+                        <li><a href="/books" class="link-dark d-inline-flex text-decoration-none rounded"># books</a></li>
                       </ul>
                     </div>
                   </li>

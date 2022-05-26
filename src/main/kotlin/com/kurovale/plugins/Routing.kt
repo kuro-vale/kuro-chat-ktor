@@ -1,6 +1,7 @@
 package com.kurovale.plugins
 
 import com.kurovale.routes.authRouting
+import com.kurovale.routes.chatRouting
 import com.kurovale.routes.httpStatusRouting
 import io.ktor.server.routing.*
 import io.ktor.server.application.*
@@ -24,5 +25,6 @@ fun Application.configureRouting() {
         }
         authRouting()
         httpStatusRouting()
+        chatRouting()
     }
 }
