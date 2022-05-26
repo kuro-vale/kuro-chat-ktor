@@ -50,10 +50,17 @@
                     </button>
                     <div class="collapse show" id="account-collapse">
                       <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="/auth/register" class="link-dark d-inline-flex text-decoration-none rounded">Register</a></li>
-                        <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Login</a></li>
-                        <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Profile</a></li>
-                        <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Sign out</a></li>
+                        <#if authenticated>
+                            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Profile</a></li>
+                            <li>
+                                <form action="/auth/logout" method="post">
+                                <a onclick='this.parentNode.submit(); return false;' class="link-dark d-inline-flex text-decoration-none rounded">Sign out</a>
+                                </form>
+                            </li>
+                        <#else>
+                            <li><a href="/auth/register" class="link-dark d-inline-flex text-decoration-none rounded">Register</a></li>
+                            <li><a href="/auth/login" class="link-dark d-inline-flex text-decoration-none rounded">Login</a></li>
+                        </#if>
                       </ul>
                     </div>
                   </li>

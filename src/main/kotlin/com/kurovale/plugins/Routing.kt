@@ -6,6 +6,7 @@ import io.ktor.server.application.*
 import io.ktor.server.freemarker.*
 import io.ktor.server.http.content.*
 import io.ktor.server.response.*
+import io.ktor.server.sessions.*
 
 fun Application.configureRouting() {
     
@@ -14,7 +15,11 @@ fun Application.configureRouting() {
             resources("static")
         }
         get("/") {
-            call.respond(FreeMarkerContent("index.ftl", model = null))
+            var authenticated = false
+            if (call.sessions.get<UserSession>() != null) {
+               authenticated = true
+            }
+            call.respond(FreeMarkerContent("index.ftl", mapOf("authenticated" to authenticated)))
         }
         authRouting()
     }
