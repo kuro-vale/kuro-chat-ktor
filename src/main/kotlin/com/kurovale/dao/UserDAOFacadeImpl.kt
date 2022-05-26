@@ -8,8 +8,16 @@ import org.jetbrains.exposed.sql.*
 class UserDAOFacadeImpl : UserDAOFacade {
     private fun resultRowToUser(row: ResultRow) = User(
         id = row[Users.id],
-        username = row[Users.username]
+        username = row[Users.username],
+        password = row[Users.password]
     )
+
+    override suspend fun getUser(username: String): User? = dbQuery {
+        Users
+            .select { Users.username eq username }
+            .map(::resultRowToUser)
+            .singleOrNull()
+    }
 
     override suspend fun storeUser(username: String, password: String): User? = dbQuery {
         val insertStatement = Users.insert {

@@ -10,6 +10,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
 import io.ktor.server.util.*
+import org.jetbrains.exposed.exceptions.ExposedSQLException
 
 fun Route.authRouting() {
     route("/auth") {
@@ -24,8 +25,13 @@ fun Route.authRouting() {
             val formParameters = call.receiveParameters()
             val username = formParameters.getOrFail("username")
             val password = formParameters.getOrFail("password")
-            userDAO.storeUser(username, password)
-            call.respondRedirect("/auth/profile")
+            try {
+                userDAO.storeUser(username, password)
+            } catch (e: ExposedSQLException) {
+                call.respondRedirect("/403")
+            }
+            call.sessions.set(UserSession(name = username))
+            call.respondRedirect("/profile")
         }
         get("login") {
             var authenticated = false

@@ -1,5 +1,6 @@
 package com.kurovale.plugins
 
+import com.kurovale.dao.userDAO
 import io.ktor.server.sessions.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
@@ -18,20 +19,20 @@ fun Application.configureSecurity() {
             userParamName = "username"
             passwordParamName = "password"
             validate { credentials ->
-                if (credentials.name == "kurovale" && credentials.password == "admin123") {
+                val user = userDAO.getUser(credentials.name)
+                if (credentials.password == user?.password) {
                     UserIdPrincipal(credentials.name)
                 } else {
                     null
                 }
             }
+            challenge {
+                call.respondRedirect("/401")
+            }
         }
         session<UserSession>("auth-session") {
             validate { session ->
-                if (session.name == "kurovale") {
-                    session
-                } else {
-                    null
-                }
+                session
             }
             challenge {
                 call.respondRedirect("auth/login")
