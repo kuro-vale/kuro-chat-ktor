@@ -8,7 +8,7 @@
             <ul id='messages'>
             </ul>
             <script>
-                var ws = new WebSocket("ws://localhost:8080/general-english");
+                var ws = new WebSocket("ws://localhost:8080/general-english?username=${username}");
                 ws.onmessage = function(event) {
                     var messages = document.getElementById('messages')
                     var message = document.createElement('li')

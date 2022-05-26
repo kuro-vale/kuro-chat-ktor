@@ -13,7 +13,7 @@ fun Route.chatRouting() {
         get("/general-english") {
             val userSession = call.principal<UserSession>()
             call.sessions.set(userSession?.copy())
-            call.respond(FreeMarkerContent("general-english.ftl", mapOf("authenticated" to true)))
+            call.respond(FreeMarkerContent("general-english.ftl", mapOf("authenticated" to true, "username" to userSession?.name)))
         }
     }
 }

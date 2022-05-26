@@ -1,10 +1,12 @@
 package com.kurovale.plugins
 
+import com.kurovale.models.ChatConnection
 import io.ktor.server.websocket.*
 import java.time.Duration
 import io.ktor.server.application.*
 import io.ktor.server.routing.*
 import io.ktor.websocket.*
+import java.util.Collections
 
 fun Application.configureSockets() {
     install(WebSockets) {
@@ -15,13 +17,26 @@ fun Application.configureSockets() {
     }
 
     routing {
-        webSocket("/general-english") {
-            send("You are connected")
-            for (frame in incoming) {
-                frame as? Frame.Text ?: continue
-                val receivedText = frame.readText()
-                send("You said: $receivedText")
+        val connections = Collections.synchronizedSet<ChatConnection?>(LinkedHashSet())
+            webSocket("/general-english") {
+                val username = call.request.queryParameters["username"]
+                val thisConnection = ChatConnection(this, username)
+                connections += thisConnection
+                try {
+                    for (frame in incoming) {
+                        frame as? Frame.Text ?: continue
+                        val receivedText = frame.readText()
+                        if (receivedText == "") {
+                            continue
+                        }
+                        val textWithUserName = "[${thisConnection.username}]: $receivedText"
+                        connections.forEach {
+                            it.session.send(textWithUserName)
+                        }
+                    }
+                } finally {
+                    connections -= thisConnection
+                }
             }
-        }
     }
 }
