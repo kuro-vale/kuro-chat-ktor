@@ -1,6 +1,7 @@
 package com.kurovale.plugins
 
 import com.kurovale.routes.authRouting
+import com.kurovale.routes.httpStatusRouting
 import io.ktor.server.routing.*
 import io.ktor.server.application.*
 import io.ktor.server.freemarker.*
@@ -22,5 +23,6 @@ fun Application.configureRouting() {
             call.respond(FreeMarkerContent("index.ftl", mapOf("authenticated" to authenticated)))
         }
         authRouting()
+        httpStatusRouting()
     }
 }
