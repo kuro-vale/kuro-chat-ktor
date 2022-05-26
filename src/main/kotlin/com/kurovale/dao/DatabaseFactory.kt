@@ -1,5 +1,6 @@
 package com.kurovale.dao
 
+import com.kurovale.models.Messages
 import com.kurovale.models.Users
 import kotlinx.coroutines.*
 import org.jetbrains.exposed.sql.*
@@ -12,6 +13,7 @@ object DatabaseFactory {
         val database = Database.connect(jdbcURL, driverClassName)
         transaction(database) {
             SchemaUtils.create(Users)
+            SchemaUtils.create(Messages)
         }
     }
 

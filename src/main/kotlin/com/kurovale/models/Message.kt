@@ -1,0 +1,15 @@
+package com.kurovale.models
+
+import com.kurovale.dao.MessageSection
+import org.jetbrains.exposed.sql.Table
+
+data class Message(val username: String, val body: String, val section: MessageSection)
+
+object Messages : Table() {
+    val id = integer("id").autoIncrement()
+    val username = varchar("username", length = 50)
+    val body = varchar("body", length = 255)
+    val section = customEnumeration("section", "ENUM('GENERAL_US', 'GENERAL_ES', 'GAMES', 'MOVIES', 'BOOKS')", { value -> MessageSection.valueOf(value as String) }, { it.name })
+
+    override val primaryKey = PrimaryKey(id)
+}
