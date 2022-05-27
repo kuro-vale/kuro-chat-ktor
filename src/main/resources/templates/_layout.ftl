@@ -68,7 +68,7 @@
             </div>
         </div>
         <div class="d-flex flex-column container">
-            <nav class="navbar navbar-expand-lg bg-light">
+            <nav class="navbar navbar-expand-lg bg-light overflow-hidden" style="max-height: 50px">
                 <div class="container-fluid d-flex justify-content-between">
                     <a class="navbar-brand" role="button" data-bs-toggle="collapse" data-bs-target="#collapseSide" aria-expanded="true" aria-controls="collapseSide">
                         <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M14 19h-14v-1h14v1zm9.247-8.609l-3.247 4.049-3.263-4.062-.737.622 4 5 4-5-.753-.609zm-9.247 2.609h-14v-1h14v1zm0-6h-14v-1h14v1z"/></svg>
