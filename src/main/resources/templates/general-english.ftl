@@ -6,6 +6,9 @@
                 <button>Send</button>
             </form>
             <ul id='messages'>
+            <#list messages as message>
+                <li>[${message.username}]: ${message.body}</li>
+            </#list>
             </ul>
             <script>
                 var ws = new WebSocket("ws://localhost:8080/general-english?username=${username}");

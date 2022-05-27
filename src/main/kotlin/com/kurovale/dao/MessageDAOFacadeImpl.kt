@@ -20,7 +20,7 @@ class MessageDAOFacadeImpl : MessageDAOFacade {
             .map(::resultRowToMessage)
     }
 
-    override suspend fun storeMessage(username: String, body: String, section: MessageSection): Message? = dbQuery {
+    override suspend fun storeMessage(username: String?, body: String, section: MessageSection): Message? = dbQuery {
         val insertStatement = Messages.insert {
             it[Messages.username] = username
             it[Messages.body] = body

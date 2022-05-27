@@ -1,5 +1,7 @@
 package com.kurovale.plugins
 
+import com.kurovale.dao.MessageSection
+import com.kurovale.dao.messageDAO
 import com.kurovale.models.ChatConnection
 import io.ktor.server.websocket.*
 import java.time.Duration
@@ -29,6 +31,7 @@ fun Application.configureSockets() {
                         if (receivedText == "") {
                             continue
                         }
+                        messageDAO.storeMessage(thisConnection.username, receivedText, MessageSection.GENERAL_US)
                         val textWithUserName = "[${thisConnection.username}]: $receivedText"
                         connections.forEach {
                             it.session.send(textWithUserName)

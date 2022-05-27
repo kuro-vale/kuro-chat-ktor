@@ -1,5 +1,7 @@
 package com.kurovale.routes
 
+import com.kurovale.dao.MessageSection
+import com.kurovale.dao.messageDAO
 import com.kurovale.plugins.UserSession
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
@@ -13,7 +15,8 @@ fun Route.chatRouting() {
         get("/general-english") {
             val userSession = call.principal<UserSession>()
             call.sessions.set(userSession?.copy())
-            call.respond(FreeMarkerContent("general-english.ftl", mapOf("authenticated" to true, "username" to userSession?.name)))
+            val messages = messageDAO.getAllMessagesBySection(MessageSection.GENERAL_US)
+            call.respond(FreeMarkerContent("general-english.ftl", mapOf("authenticated" to true, "username" to userSession?.name, "messages" to messages)))
         }
     }
 }
