@@ -1,4 +1,4 @@
-<#import "_layout.ftl" as layout />
+<#import "../_layout.ftl" as layout />
 <@layout.header>
     <h3 class="text-center"># general-english</h3>
         <ul id="messages" class="list-group overflow-auto mb-1" style="height: 75vh;">

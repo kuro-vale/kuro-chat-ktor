@@ -19,7 +19,7 @@ fun Route.authRouting() {
             if (call.sessions.get<UserSession>() != null) {
                 authenticated = true
             }
-            call.respond(FreeMarkerContent("register.ftl", mapOf("authenticated" to authenticated)))
+            call.respond(FreeMarkerContent("auth/register.ftl", mapOf("authenticated" to authenticated)))
         }
         post("register") {
             val formParameters = call.receiveParameters()
@@ -38,7 +38,7 @@ fun Route.authRouting() {
             if (call.sessions.get<UserSession>() != null) {
                 authenticated = true
             }
-            call.respond(FreeMarkerContent("login.ftl", mapOf("authenticated" to authenticated)))
+            call.respond(FreeMarkerContent("auth/login.ftl", mapOf("authenticated" to authenticated)))
         }
         authenticate("auth-form") {
             post("login") {
@@ -56,7 +56,7 @@ fun Route.authRouting() {
         get("profile") {
             val userSession = call.principal<UserSession>()
             call.sessions.set(userSession?.copy())
-            call.respond(FreeMarkerContent("profile.ftl", mapOf("user" to userSession?.name, "authenticated" to true)))
+            call.respond(FreeMarkerContent("auth/profile.ftl", mapOf("user" to userSession?.name, "authenticated" to true)))
         }
         post("profile") {
             val userSession = call.principal<UserSession>()
@@ -66,7 +66,11 @@ fun Route.authRouting() {
             when (formParameters.getOrFail("_action")) {
                 "update" -> {
                     val newUsername = formParameters.getOrFail("username")
-                    user?.id?.let { it1 -> userDAO.editUser(it1, newUsername) }
+                    try {
+                        user?.id?.let { it1 -> userDAO.editUser(it1, newUsername) }
+                    } catch (e: ExposedSQLException) {
+                        call.respondRedirect("/403")
+                    }
                     val updatedUser = userDAO.getUser(newUsername)
                     call.sessions.set(updatedUser?.username?.let { it1 -> UserSession(it1) })
                     call.respondRedirect("/")

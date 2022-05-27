@@ -13,13 +13,13 @@ fun Route.httpStatusRouting() {
         if (call.sessions.get<UserSession>() != null) {
             authenticated = true
         }
-        call.respond(FreeMarkerContent("401.ftl", mapOf("authenticated" to authenticated)))
+        call.respond(FreeMarkerContent("status/401.ftl", mapOf("authenticated" to authenticated)))
     }
     get("403") {
         var authenticated = false
         if (call.sessions.get<UserSession>() != null) {
             authenticated = true
         }
-        call.respond(FreeMarkerContent("403.ftl", mapOf("authenticated" to authenticated)))
+        call.respond(FreeMarkerContent("status/403.ftl", mapOf("authenticated" to authenticated)))
     }
 }

@@ -1,4 +1,4 @@
-<#import "_layout.ftl" as layout />
+<#import "../_layout.ftl" as layout />
 <@layout.header>
     <h1 class="text-center fst-italic m-4">Profile</h1>
     <div class="container-fluid d-flex justify-content-center">
