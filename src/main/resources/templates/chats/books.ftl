@@ -1,6 +1,6 @@
 <#import "../_layout.ftl" as layout />
 <@layout.header>
-    <h3 class="text-center"># general-english</h3>
+    <h3 class="text-center"># books</h3>
         <ul id="messages" class="list-group overflow-auto mb-1" style="height: 75vh;">
             <#list messages as message>
                 <li class="list-group-item">[${message.username}]: ${message.body}</li>

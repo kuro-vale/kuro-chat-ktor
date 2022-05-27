@@ -19,11 +19,15 @@ fun Application.configureSockets() {
     }
 
     routing {
-        val connections = Collections.synchronizedSet<ChatConnection?>(LinkedHashSet())
+        val generalUsConnections = Collections.synchronizedSet<ChatConnection?>(LinkedHashSet())
+        val generalEsConnections = Collections.synchronizedSet<ChatConnection?>(LinkedHashSet())
+        val gamesConnections = Collections.synchronizedSet<ChatConnection?>(LinkedHashSet())
+        val moviesEsConnections = Collections.synchronizedSet<ChatConnection?>(LinkedHashSet())
+        val booksEsConnections = Collections.synchronizedSet<ChatConnection?>(LinkedHashSet())
             webSocket("/general-english") {
                 val username = call.request.queryParameters["username"]
                 val thisConnection = ChatConnection(this, username)
-                connections += thisConnection
+                generalUsConnections += thisConnection
                 try {
                     for (frame in incoming) {
                         frame as? Frame.Text ?: continue
@@ -33,13 +37,97 @@ fun Application.configureSockets() {
                         }
                         messageDAO.storeMessage(thisConnection.username, receivedText, MessageSection.GENERAL_US)
                         val textWithUserName = "[${thisConnection.username}]: $receivedText"
-                        connections.forEach {
+                        generalUsConnections.forEach {
                             it.session.send(textWithUserName)
                         }
                     }
                 } finally {
-                    connections -= thisConnection
+                    generalUsConnections -= thisConnection
                 }
             }
+        webSocket("/general-spanish") {
+            val username = call.request.queryParameters["username"]
+            val thisConnection = ChatConnection(this, username)
+            generalEsConnections += thisConnection
+            try {
+                for (frame in incoming) {
+                    frame as? Frame.Text ?: continue
+                    val receivedText = frame.readText()
+                    if (receivedText == "") {
+                        continue
+                    }
+                    messageDAO.storeMessage(thisConnection.username, receivedText, MessageSection.GENERAL_ES)
+                    val textWithUserName = "[${thisConnection.username}]: $receivedText"
+                    generalEsConnections.forEach {
+                        it.session.send(textWithUserName)
+                    }
+                }
+            } finally {
+                generalEsConnections -= thisConnection
+            }
+        }
+        webSocket("/games") {
+            val username = call.request.queryParameters["username"]
+            val thisConnection = ChatConnection(this, username)
+            gamesConnections += thisConnection
+            try {
+                for (frame in incoming) {
+                    frame as? Frame.Text ?: continue
+                    val receivedText = frame.readText()
+                    if (receivedText == "") {
+                        continue
+                    }
+                    messageDAO.storeMessage(thisConnection.username, receivedText, MessageSection.GAMES)
+                    val textWithUserName = "[${thisConnection.username}]: $receivedText"
+                    gamesConnections.forEach {
+                        it.session.send(textWithUserName)
+                    }
+                }
+            } finally {
+                gamesConnections -= thisConnection
+            }
+        }
+        webSocket("/movies") {
+            val username = call.request.queryParameters["username"]
+            val thisConnection = ChatConnection(this, username)
+            moviesEsConnections += thisConnection
+            try {
+                for (frame in incoming) {
+                    frame as? Frame.Text ?: continue
+                    val receivedText = frame.readText()
+                    if (receivedText == "") {
+                        continue
+                    }
+                    messageDAO.storeMessage(thisConnection.username, receivedText, MessageSection.MOVIES)
+                    val textWithUserName = "[${thisConnection.username}]: $receivedText"
+                    moviesEsConnections.forEach {
+                        it.session.send(textWithUserName)
+                    }
+                }
+            } finally {
+                moviesEsConnections -= thisConnection
+            }
+        }
+        webSocket("/books") {
+            val username = call.request.queryParameters["username"]
+            val thisConnection = ChatConnection(this, username)
+            booksEsConnections += thisConnection
+            try {
+                for (frame in incoming) {
+                    frame as? Frame.Text ?: continue
+                    val receivedText = frame.readText()
+                    if (receivedText == "") {
+                        continue
+                    }
+                    messageDAO.storeMessage(thisConnection.username, receivedText, MessageSection.BOOKS)
+                    val textWithUserName = "[${thisConnection.username}]: $receivedText"
+                    booksEsConnections.forEach {
+                        it.session.send(textWithUserName)
+                    }
+                }
+            } finally {
+                booksEsConnections -= thisConnection
+            }
+        }
     }
 }

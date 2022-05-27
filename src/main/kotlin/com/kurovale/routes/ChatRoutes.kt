@@ -18,5 +18,29 @@ fun Route.chatRouting() {
             val messages = messageDAO.getAllMessagesBySection(MessageSection.GENERAL_US)
             call.respond(FreeMarkerContent("chats/general-english.ftl", mapOf("authenticated" to true, "username" to userSession?.name, "messages" to messages)))
         }
+        get("/general-spanish") {
+            val userSession = call.principal<UserSession>()
+            call.sessions.set(userSession?.copy())
+            val messages = messageDAO.getAllMessagesBySection(MessageSection.GENERAL_ES)
+            call.respond(FreeMarkerContent("chats/general-spanish.ftl", mapOf("authenticated" to true, "username" to userSession?.name, "messages" to messages)))
+        }
+        get("/games") {
+            val userSession = call.principal<UserSession>()
+            call.sessions.set(userSession?.copy())
+            val messages = messageDAO.getAllMessagesBySection(MessageSection.GAMES)
+            call.respond(FreeMarkerContent("chats/games.ftl", mapOf("authenticated" to true, "username" to userSession?.name, "messages" to messages)))
+        }
+        get("/movies") {
+            val userSession = call.principal<UserSession>()
+            call.sessions.set(userSession?.copy())
+            val messages = messageDAO.getAllMessagesBySection(MessageSection.MOVIES)
+            call.respond(FreeMarkerContent("chats/movies.ftl", mapOf("authenticated" to true, "username" to userSession?.name, "messages" to messages)))
+        }
+        get("/books") {
+            val userSession = call.principal<UserSession>()
+            call.sessions.set(userSession?.copy())
+            val messages = messageDAO.getAllMessagesBySection(MessageSection.BOOKS)
+            call.respond(FreeMarkerContent("chats/books.ftl", mapOf("authenticated" to true, "username" to userSession?.name, "messages" to messages)))
+        }
     }
 }
