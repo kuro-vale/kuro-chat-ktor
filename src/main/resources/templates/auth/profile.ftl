@@ -8,7 +8,7 @@
         <form action="/profile" method="post" class="w-50">
             <div class="input-group d-flex flex-column flex-nowrap">
               <span class="input-group-text rounded mt-3" id="addon-wrapping">Username</span>
-              <input type="text" class="form-control w-100 rounded"aria-label="Username" name="username" value="${user}">
+              <input type="text" class="form-control w-100 rounded"aria-label="Username" name="username" value="${user}" required="true">
               <button type="submit" class="btn btn-outline-primary rounded mt-3" name="_action" value="update">Edit</button>
             </div>
         </form>
