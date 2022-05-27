@@ -5,6 +5,7 @@ import io.ktor.server.sessions.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.response.*
+import org.mindrot.jbcrypt.BCrypt
 
 data class UserSession(val name: String) : Principal
 fun Application.configureSecurity() {
@@ -19,8 +20,8 @@ fun Application.configureSecurity() {
             userParamName = "username"
             passwordParamName = "password"
             validate { credentials ->
-                val user = userDAO.getUser(credentials.name)
-                if (credentials.password == user?.password) {
+                val user = userDAO.getUser(credentials.name) ?: return@validate null
+                if (BCrypt.checkpw(credentials.password, user.password)) {
                     UserIdPrincipal(credentials.name)
                 } else {
                     null
