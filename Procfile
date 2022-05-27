@@ -1,0 +1,1 @@
+web: ./build/install/com.kurovale.kuro-chat/bin/com.kurovale.kuro-chat
