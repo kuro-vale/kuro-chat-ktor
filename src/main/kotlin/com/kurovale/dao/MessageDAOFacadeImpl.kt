@@ -2,6 +2,7 @@ package com.kurovale.dao
 
 import com.kurovale.dao.DatabaseFactory.dbQuery
 import com.kurovale.models.Message
+import com.kurovale.models.MessageSection
 import com.kurovale.models.Messages
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.insert

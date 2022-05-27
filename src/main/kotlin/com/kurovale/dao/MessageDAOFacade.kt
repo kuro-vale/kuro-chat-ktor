@@ -1,6 +1,7 @@
 package com.kurovale.dao
 
 import com.kurovale.models.Message
+import com.kurovale.models.MessageSection
 
 interface MessageDAOFacade {
     suspend fun getAllMessagesBySection(section: MessageSection): List<Message>

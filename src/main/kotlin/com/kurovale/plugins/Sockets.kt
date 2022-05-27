@@ -1,6 +1,6 @@
 package com.kurovale.plugins
 
-import com.kurovale.dao.MessageSection
+import com.kurovale.models.MessageSection
 import com.kurovale.dao.messageDAO
 import com.kurovale.models.ChatConnection
 import io.ktor.server.websocket.*

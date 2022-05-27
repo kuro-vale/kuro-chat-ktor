@@ -1,6 +1,6 @@
 package com.kurovale.routes
 
-import com.kurovale.dao.MessageSection
+import com.kurovale.models.MessageSection
 import com.kurovale.dao.messageDAO
 import com.kurovale.plugins.UserSession
 import io.ktor.server.application.*

@@ -1,6 +1,5 @@
 package com.kurovale.models
 
-import com.kurovale.dao.MessageSection
 import org.jetbrains.exposed.sql.Table
 
 data class Message(val username: String?, val body: String, val section: MessageSection)
