@@ -10,7 +10,7 @@
             <input type="text" id="messageText" autocomplete="off" class="form-control">
             <button class="btn btn-outline-primary">Send</button>
         </form>
-        <script>var ws = new WebSocket("ws://localhost:8080/general-spanish?username=${username}");</script>
+        <script>var ws = new WebSocket(location.origin.replace(/^http/, 'ws') + "/general-spanish?username=${username}");</script>
         <script src="/static/WebSocketClient.js">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </@layout.header>
