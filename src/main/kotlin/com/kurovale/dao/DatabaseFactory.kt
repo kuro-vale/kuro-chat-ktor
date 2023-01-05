@@ -8,9 +8,9 @@ import org.jetbrains.exposed.sql.transactions.*
 import org.jetbrains.exposed.sql.transactions.experimental.*
 
 object DatabaseFactory {
-    fun init(jdbcURL: String) {
-        val driverClassName = "com.mysql.cj.jdbc.Driver"
-        val database = Database.connect(jdbcURL, driverClassName)
+    fun init() {
+        val driverClassName = "org.sqlite.JDBC"
+        val database = Database.connect("jdbc:sqlite:./data.db", driverClassName)
         transaction(database) {
             SchemaUtils.create(Users)
             SchemaUtils.create(Messages)

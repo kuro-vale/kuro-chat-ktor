@@ -9,8 +9,7 @@ fun main(args: Array<String>): Unit =
 
 @Suppress("unused") // application.conf references the main function. This annotation prevents the IDE from marking it as unused.
 fun Application.module() {
-    val jdbcURL = environment.config.property("ktor.database.DATABASE_URL").getString()
-    DatabaseFactory.init(jdbcURL)
+    DatabaseFactory.init()
     configureRouting()
     configureSockets()
     configureTemplating()
